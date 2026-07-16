@@ -1,0 +1,31 @@
+{
+  "juju": {
+    "nome": "JUJU",
+    "mensagem": "Aqui ficará a mensagem da Juju."
+  },
+
+  "marcele": {
+    "nome": "MARCELE",
+    "mensagem": "Aqui ficará a mensagem da Marcele."
+  },
+
+  "eva": {
+    "nome": "EVA",
+    "mensagem": "Aqui ficará a mensagem da Eva."
+  },
+
+  "eden": {
+    "nome": "EDEN",
+    "mensagem": "Aqui ficará a mensagem do Eden."
+  },
+
+  "ellie": {
+    "nome": "ELLIE",
+    "mensagem": "Aqui ficará a mensagem da Ellie."
+  },
+
+  "brunna": {
+    "nome": "BRUNNA",
+    "mensagem": "Aqui ficará a mensagem da Brunna."
+  }
+}

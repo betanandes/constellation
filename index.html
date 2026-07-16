@@ -1,40 +1,63 @@
 <!doctype html>
+
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Constellation</title>
-
     <link rel="stylesheet" href="style.css" />
-  </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
   <body>
     <div class="universe">
       <div class="background"></div>
-
       <div class="nebula"></div>
-
       <div class="stars"></div>
 
-      <div class="glow"></div>
+      ```
+      <div class="centerScene">
+        <div class="overlay"></div>
 
-      <div class="planet">
-        <img src="assets/img/planet.png" class="planet-texture" />
+        <div class="letterContainer">
+          <div class="letter">
+            <button class="closeLetter">✕</button>
 
-        <div class="orbit">
-          <div class="member s4m">S4M</div>
-          <div class="member juju">JUJU</div>
-          <div class="member marcele">MARCELE</div>
-          <div class="member eva">EVA</div>
-          <div class="member eden">EDEN</div>
-          <div class="member ellie">ELLIE</div>
-          <div class="member brunna">BRUNNA</div>
+            <h2 class="letterTitle"></h2>
+
+            <p class="letterText"></p>
+          </div>
+        </div>
+
+        <div class="glow"></div>
+
+        <div class="planet">
+          <div class="planetGlow"></div>
+          <img
+            src="assets/img/planet.png"
+            class="planet-texture"
+            alt="Planeta"
+          />
+        </div>
+
+        <div class="constellation">
+          <div class="member s4m">✦ S4M</div>
+          <div class="member juju">✦ JUJU</div>
+          <div class="member marcele">✦ MARCELE</div>
+          <div class="member eva">✦ EVA</div>
+          <div class="member eden">✦ EDEN</div>
+          <div class="member ellie">✦ ELLIE</div>
+          <div class="member brunna">✦ BRUNNA</div>
         </div>
       </div>
     </div>
 
     <script src="script.js"></script>
+    ```
   </body>
 </html>

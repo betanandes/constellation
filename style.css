@@ -1,63 +1,81 @@
+/* ==========================
+   RESET
+========================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ==========================
+   BODY
+========================== */
+
 body {
   overflow: hidden;
+
   background: #020817;
 
-  font-family: Segoe UI;
+  font-family: "Cinzel", serif;
+
+  cursor: crosshair;
+
+  color: white;
 }
 
-/* UNIVERSE */
+/* ==========================
+   UNIVERSE
+========================== */
 
 .universe {
   position: relative;
 
   width: 100vw;
+
   height: 100vh;
 
   overflow: hidden;
 }
 
-/* BACKGROUND */
+/* ==========================
+   BACKGROUND
+========================== */
 
-.background {
+.background,
+.nebula,
+.stars {
   position: absolute;
 
-  width: 100%;
-  height: 100%;
+  inset: 0;
 
-  background-image: url("assets/img/background.jpg");
+  pointer-events: none;
+}
 
-  background-size: cover;
-
-  background-position: center;
+.background {
+  background: url("assets/img/background.jpg") center/cover;
 
   z-index: 1;
 }
 
-/* NEBULOSA */
-
 .nebula {
-  position: absolute;
-
-  width: 100%;
-  height: 100%;
-
-  background-image: url("assets/img/nebula.png");
-
-  background-size: cover;
-
-  background-position: center;
+  background: url("assets/img/nebula.png") center/cover;
 
   opacity: 0.55;
 
   animation: nebulaMove 40s linear infinite;
 
   z-index: 2;
+}
+
+.stars {
+  background: url("assets/img/stars.png") center/cover;
+
+  opacity: 0.9;
+
+  animation: twinkle 5s ease-in-out infinite alternate;
+
+  z-index: 3;
 }
 
 @keyframes nebulaMove {
@@ -74,28 +92,9 @@ body {
   }
 }
 
-/* STARS */
-
-.stars {
-  position: absolute;
-
-  width: 100%;
-  height: 100%;
-
-  background-image: url("assets/img/stars.png");
-
-  background-size: cover;
-
-  opacity: 0.85;
-
-  animation: twinkle 4s infinite alternate;
-
-  z-index: 3;
-}
-
 @keyframes twinkle {
   from {
-    opacity: 0.4;
+    opacity: 0.45;
   }
 
   to {
@@ -103,20 +102,12 @@ body {
   }
 }
 
-/* GLOW */
+/* ==========================
+   CENTER
+========================== */
 
-.glow {
+.centerScene {
   position: absolute;
-
-  width: 700px;
-
-  height: 700px;
-
-  background: url("assets/img/glow.png");
-
-  background-size: contain;
-
-  background-repeat: no-repeat;
 
   left: 50%;
 
@@ -124,35 +115,109 @@ body {
 
   transform: translate(-50%, -50%);
 
-  opacity: 0.55;
+  width: 900px;
 
-  z-index: 4;
+  height: 900px;
+
+  z-index: 20;
 }
 
-/* PLANET */
+/* ==========================
+   GLOW
+========================== */
+
+.glow {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 720px;
+
+  height: 720px;
+
+  background: url("assets/img/glow.png") center/contain no-repeat;
+
+  opacity: 0.55;
+
+  animation: glowPulse 8s ease-in-out infinite;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.45;
+
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+
+  50% {
+    opacity: 0.75;
+
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  100% {
+    opacity: 0.45;
+
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+}
+
+/* ==========================
+   PLANET
+========================== */
 
 .planet {
   position: absolute;
 
   left: 50%;
+
   top: 50%;
 
   width: 620px;
+
   height: 620px;
 
   transform: translate(-50%, -50%);
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
-  z-index: 10;
+  pointer-events: none;
+
+  z-index: 5;
 
   animation: planetFloat 8s ease-in-out infinite;
 }
 
-.planet:hover {
-  transform: translate(-50%, -50%) scale(1.03);
+.planetGlow {
+  position: absolute;
+
+  width: 520px;
+
+  height: 520px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(90, 170, 255, 0.45),
+    transparent 70%
+  );
+
+  filter: blur(40px);
+
+  animation: breath 6s ease-in-out infinite;
 }
 
 .planet-texture {
@@ -167,7 +232,7 @@ body {
 
 @keyframes planetFloat {
   0% {
-    transform: translate(-50%, -50%) translateY(0px);
+    transform: translate(-50%, -50%) translateY(0);
   }
 
   50% {
@@ -175,7 +240,7 @@ body {
   }
 
   100% {
-    transform: translate(-50%, -50%) translateY(0px);
+    transform: translate(-50%, -50%) translateY(0);
   }
 }
 
@@ -189,105 +254,426 @@ body {
   }
 }
 
-/* ORBIT */
+@keyframes breath {
+  0% {
+    transform: scale(0.9);
 
-.orbit {
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.1);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.9);
+
+    opacity: 0.5;
+  }
+}
+
+/* ==========================
+   CONSTELLATION
+========================== */
+
+.constellation {
   position: absolute;
 
-  width: 820px;
-  height: 820px;
+  inset: 0;
 
-  border-radius: 50%;
-
-  animation: orbitRotation 60s linear infinite;
+  z-index: 100;
 }
 
-@keyframes orbitRotation {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-/* MEMBERS */
+/* ==========================
+   MEMBERS
+========================== */
 
 .member {
   position: absolute;
 
-  color: white;
+  font-size: 20px;
 
-  font-size: 18px;
+  font-weight: 500;
 
-  font-weight: 600;
+  letter-spacing: 4px;
 
-  letter-spacing: 2px;
+  text-transform: uppercase;
 
   cursor: pointer;
 
-  transition: 0.4s;
+  user-select: none;
+
+  transition: 0.35s;
 
   text-shadow:
-    0 0 12px #6aafff,
-    0 0 30px #6aafff;
-}
-
-.s4m {
-  top: -10px;
-  left: 50%;
-
-  transform: translateX(-50%);
-}
-.juju {
-  top: 120px;
-  right: 20px;
-}
-.eva {
-  top: 120px;
-  left: 20px;
-}
-.marcele {
-  left: -30px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-}
-.brunna {
-  right: -40px;
-
-  top: 50%;
-
-  transform: translateY(-50%);
-}
-.eden {
-  bottom: 120px;
-
-  left: 100px;
-}
-.ellie {
-  bottom: 120px;
-
-  right: 100px;
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 15px rgba(110, 180, 255, 0.6),
+    0 0 30px rgba(70, 150, 255, 0.5);
 }
 
 .member:hover {
-  transform: scale(1.25);
+  color: #ffffff;
 
-  color: #a8d8ff;
+  transform: scale(1.08);
 
   text-shadow:
-    0 0 20px white,
-    0 0 40px #7ab9ff,
-    0 0 70px #6aafff;
+    0 0 8px white,
+    0 0 20px #9fd6ff,
+    0 0 40px #4fa3ff,
+    0 0 80px #4fa3ff;
 }
 
-.member::before {
-  content: "✦";
+/* POSIÇÕES */
 
-  margin-right: 8px;
+.s4m {
+  left: 50%;
 
-  color: #a8d8ff;
+  top: 40px;
+
+  transform: translateX(-50%);
+}
+
+.s4m:hover {
+  transform: translateX(-50%) scale(1.08);
+}
+
+.eva {
+  left: 90px;
+
+  top: 180px;
+}
+
+.juju {
+  right: 90px;
+
+  top: 180px;
+}
+
+.marcele {
+  left: 20px;
+
+  top: 430px;
+}
+
+.brunna {
+  right: 20px;
+
+  top: 430px;
+}
+
+.eden {
+  left: 150px;
+
+  bottom: 170px;
+}
+
+.ellie {
+  right: 150px;
+
+  bottom: 170px;
+}
+
+/* ==========================
+   OVERLAY
+========================== */
+
+.overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.72);
+
+  backdrop-filter: blur(8px);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: 0.8s ease;
+
+  z-index: 150;
+}
+
+.overlay.active {
+  opacity: 1;
+}
+
+/* ==========================
+   LETTER CONTAINER
+========================== */
+
+.letterContainer {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%) scale(0.75);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: 0.8s ease;
+
+  z-index: 200;
+}
+
+.letterContainer.active {
+  opacity: 1;
+
+  transform: translate(-50%, -50%) scale(1);
+
+  pointer-events: auto;
+
+  animation: letterPop 0.8s ease;
+}
+
+/* ==========================
+   LETTER
+========================== */
+
+.letter {
+  position: relative;
+
+  width: 720px;
+
+  max-width: 92vw;
+
+  min-height: 420px;
+
+  padding: 55px;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  background: rgba(8, 18, 40, 0.82);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(145, 200, 255, 0.2);
+
+  box-shadow:
+    0 0 35px rgba(75, 140, 255, 0.22),
+    0 0 120px rgba(70, 140, 255, 0.12);
+}
+
+/* Reflexo */
+
+.letter::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -130%;
+
+  width: 80%;
+
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  animation: shine 7s infinite;
+}
+
+.letterTitle {
+  font-size: 34px;
+
+  font-weight: 600;
+
+  letter-spacing: 5px;
+
+  margin-bottom: 30px;
+
+  color: white;
+}
+
+.letterText {
+  color: #d9ebff;
+
+  font-size: 18px;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.5px;
+
+  white-space: pre-line;
+}
+
+/* ==========================
+   BOTÃO FECHAR
+========================== */
+
+.closeLetter {
+  position: absolute;
+
+  right: 18px;
+
+  top: 18px;
+
+  width: 42px;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  transition: 0.35s;
+}
+
+.closeLetter:hover {
+  background: #4ea8ff;
+
+  transform: rotate(90deg);
+
+  box-shadow:
+    0 0 15px #4ea8ff,
+    0 0 35px #4ea8ff;
+}
+
+/* ==========================
+   ANIMAÇÕES
+========================== */
+
+@keyframes letterPop {
+  0% {
+    opacity: 0;
+
+    transform: translate(-50%, -45%) scale(0.65);
+  }
+
+  70% {
+    transform: translate(-50%, -50%) scale(1.03);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -130%;
+  }
+
+  45% {
+    left: 150%;
+  }
+
+  100% {
+    left: 150%;
+  }
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+
+@media (max-width: 900px) {
+  .centerScene {
+    width: 100vw;
+
+    height: 100vh;
+  }
+
+  .planet {
+    width: 360px;
+
+    height: 360px;
+  }
+
+  .glow {
+    width: 420px;
+
+    height: 420px;
+  }
+
+  .member {
+    font-size: 13px;
+
+    letter-spacing: 2px;
+  }
+
+  .letter {
+    width: 92vw;
+
+    padding: 30px;
+
+    min-height: auto;
+  }
+
+  .letterTitle {
+    font-size: 24px;
+  }
+
+  .letterText {
+    font-size: 15px;
+
+    line-height: 1.7;
+  }
+
+  .s4m {
+    top: 80px;
+  }
+
+  .eva {
+    left: 20px;
+
+    top: 180px;
+  }
+
+  .juju {
+    right: 20px;
+
+    top: 180px;
+  }
+
+  .marcele {
+    left: 10px;
+
+    top: 340px;
+  }
+
+  .brunna {
+    right: 10px;
+
+    top: 340px;
+  }
+
+  .eden {
+    left: 50px;
+
+    bottom: 180px;
+  }
+
+  .ellie {
+    right: 50px;
+
+    bottom: 180px;
+  }
 }
