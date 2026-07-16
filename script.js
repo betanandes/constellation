@@ -25,3 +25,7 @@ closeLetter.addEventListener("click", () => {
 
   letterContainer.classList.remove("active");
 });
+
+// setTimeout(() => {
+//   abrirEnvelopeCosmico();
+// }, 3000);

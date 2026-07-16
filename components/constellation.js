@@ -11,17 +11,34 @@ function iniciarConstellation() {
 function abrirCarta(member) {
   const id = member.classList[1];
 
-  if (id === "s4m") return;
+  // S4M continua apenas como elemento central
+  if (id === "s4m") {
+    return;
+  }
 
   const pessoa = integrantes[id];
 
-  letterTitle.textContent = pessoa.nome;
+  if (!pessoa) {
+    console.log("Pessoa não encontrada:", id);
+
+    return;
+  }
+
+  // Escurece o universo
 
   overlay.classList.add("active");
 
-  letterContainer.classList.add("active");
+  // Inicia música
 
   iniciarAudio();
 
-  escreverTexto(pessoa.mensagem, letterText);
+  // Reação do universo
+
+  if (typeof universoCartaAberta === "function") {
+    universoCartaAberta();
+  }
+
+  // Abre o envelope com a pessoa escolhida
+
+  abrirEnvelopeCosmico(pessoa);
 }

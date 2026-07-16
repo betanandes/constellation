@@ -679,3 +679,224 @@ body {
     bottom: 180px;
   }
 }
+
+/* ==========================
+   PARTICLES
+========================== */
+
+#spaceParticles {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  z-index: 4;
+
+  pointer-events: none;
+}
+
+/* ==========================
+   COSMIC ENVELOPE
+========================== */
+
+.cosmicEnvelope {
+  position: absolute;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform: translate(-50%, -50%) scale(0);
+
+  width: 260px;
+
+  height: 180px;
+
+  z-index: 30;
+
+  opacity: 0;
+
+  transition: 1s ease;
+}
+
+.cosmicEnvelope.active {
+  opacity: 1;
+
+  transform: translate(-50%, -50%) scale(1);
+
+  animation: envelopeFloat 5s ease-in-out infinite;
+}
+
+.envelopeBody {
+  width: 100%;
+
+  height: 100%;
+
+  border-radius: 20px;
+
+  background: linear-gradient(145deg, #111827, #020617);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-shadow: 0 0 40px rgba(100, 180, 255, 0.4);
+}
+
+.envelopeSeal {
+  width: 70px;
+
+  height: 70px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle, #fff, #5aa9ff);
+
+  color: #081426;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 30px;
+
+  box-shadow: 0 0 30px #5aa9ff;
+}
+
+.envelopeGlow {
+  position: absolute;
+
+  inset: -80px;
+
+  background: radial-gradient(circle, rgba(80, 170, 255, 0.5), transparent 70%);
+
+  filter: blur(30px);
+}
+
+@keyframes envelopeFloat {
+  0% {
+    margin-top: 0;
+  }
+
+  50% {
+    margin-top: -20px;
+  }
+
+  100% {
+    margin-top: 0;
+  }
+}
+
+.envelopeSeal.pulse {
+  animation: sealPulse 2s ease-in-out infinite;
+}
+
+@keyframes sealPulse {
+  0% {
+    transform: scale(1);
+
+    box-shadow: 0 0 20px #5aa9ff;
+  }
+
+  50% {
+    transform: scale(1.15);
+
+    box-shadow: 0 0 60px #5aa9ff;
+  }
+
+  100% {
+    transform: scale(1);
+
+    box-shadow: 0 0 20px #5aa9ff;
+  }
+}
+/* ==========================
+   ENVELOPE OPEN ANIMATION
+========================== */
+
+.envelopeBody {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.envelopeFlap {
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 55%;
+
+  background: linear-gradient(145deg, #1b2945, #07101f);
+
+  clip-path: polygon(
+    0 0,
+
+    100% 0,
+
+    50% 100%
+  );
+
+  transform-origin: top;
+
+  transition: 1s ease;
+
+  z-index: 3;
+}
+
+.envelopeLetter {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: -120px;
+
+  transform: translateX(-50%);
+
+  width: 160px;
+
+  height: 120px;
+
+  border-radius: 15px;
+
+  background: linear-gradient(135deg, #ffffff, #cfe8ff);
+
+  color: #4fa3ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 40px;
+
+  transition: 1.2s ease;
+
+  z-index: 2;
+}
+
+.cosmicEnvelope.open .envelopeFlap {
+  transform: rotateX(160deg);
+}
+
+.cosmicEnvelope.open .envelopeLetter {
+  bottom: 40px;
+}
+
+.cosmicEnvelope.open .envelopeSeal {
+  opacity: 0;
+}
