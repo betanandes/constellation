@@ -134,24 +134,35 @@ body {
 .planet {
   position: absolute;
 
-  width: 620px;
-
   left: 50%;
-
   top: 50%;
+
+  width: 620px;
+  height: 620px;
 
   transform: translate(-50%, -50%);
 
-  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10;
 
   animation: planetFloat 8s ease-in-out infinite;
-
-  filter: drop-shadow(0 0 35px #5ea8ff);
-  transition: 0.5s;
 }
 
 .planet:hover {
   transform: translate(-50%, -50%) scale(1.03);
+}
+
+.planet-texture {
+  width: 100%;
+
+  border-radius: 50%;
+
+  filter: drop-shadow(0 0 40px #64b5ff);
+
+  animation: rotatePlanet 120s linear infinite;
 }
 
 @keyframes planetFloat {
@@ -166,4 +177,117 @@ body {
   100% {
     transform: translate(-50%, -50%) translateY(0px);
   }
+}
+
+@keyframes rotatePlanet {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ORBIT */
+
+.orbit {
+  position: absolute;
+
+  width: 820px;
+  height: 820px;
+
+  border-radius: 50%;
+
+  animation: orbitRotation 60s linear infinite;
+}
+
+@keyframes orbitRotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* MEMBERS */
+
+.member {
+  position: absolute;
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  cursor: pointer;
+
+  transition: 0.4s;
+
+  text-shadow:
+    0 0 12px #6aafff,
+    0 0 30px #6aafff;
+}
+
+.s4m {
+  top: -10px;
+  left: 50%;
+
+  transform: translateX(-50%);
+}
+.juju {
+  top: 120px;
+  right: 20px;
+}
+.eva {
+  top: 120px;
+  left: 20px;
+}
+.marcele {
+  left: -30px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+}
+.brunna {
+  right: -40px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+}
+.eden {
+  bottom: 120px;
+
+  left: 100px;
+}
+.ellie {
+  bottom: 120px;
+
+  right: 100px;
+}
+
+.member:hover {
+  transform: scale(1.25);
+
+  color: #a8d8ff;
+
+  text-shadow:
+    0 0 20px white,
+    0 0 40px #7ab9ff,
+    0 0 70px #6aafff;
+}
+
+.member::before {
+  content: "✦";
+
+  margin-right: 8px;
+
+  color: #a8d8ff;
 }
