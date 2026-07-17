@@ -1,93 +1,106 @@
 const overlay = document.querySelector(".overlay");
-const envelopeScene = document.getElementById("envelopeScene");
-
-let integrantes = [];
+const container = document.getElementById("envelopeScene");
+const beam = document.getElementById("lightBeam");
+const planet = document.querySelector(".planet");
 
 /* ==========================
-   CARREGA O JSON
+   FEIXE DE LUZ
 ========================== */
 
-async function carregarMensagens() {
-  try {
-    const resposta = await fetch("assets/data/integrantes.json");
-    integrantes = await resposta.json();
-  } catch (erro) {
-    console.error("Erro ao carregar integrantes.json", erro);
-  }
+export function desenharFeixe(member) {
+  const origem = member.getBoundingClientRect();
+  const destino = planet.getBoundingClientRect();
+
+  const x1 = origem.left + origem.width / 2;
+  const y1 = origem.top + origem.height / 2;
+
+  const x2 = destino.left + destino.width / 2;
+  const y2 = destino.top + destino.height / 2;
+
+  const dx = x2 - x1;
+  const dy = y2 - y1;
+
+  const distancia = Math.sqrt(dx * dx + dy * dy);
+
+  const angulo = Math.atan2(dy, dx) * (180 / Math.PI) - 90;
+
+  beam.style.left = `${x1}px`;
+  beam.style.top = `${y1}px`;
+  beam.style.height = `${distancia}px`;
+  beam.style.transform = `rotate(${angulo}deg)`;
+
+  beam.classList.add("active");
+
+  setTimeout(() => {
+    beam.classList.remove("active");
+  }, 700);
 }
 
-carregarMensagens();
-
 /* ==========================
-   EVENTOS DOS NOMES
+   ENVELOPE
 ========================== */
 
-document.querySelectorAll(".member").forEach((member) => {
-  member.addEventListener("click", () => {
-    const nome = member.textContent.replace("✦", "").trim();
-
-    const pessoa = integrantes.find((i) => i.nome === nome);
-
-    if (!pessoa) return;
-
-    abrirCarta(pessoa);
-  });
-});
-
-/* ==========================
-   ABRIR CARTA
-========================== */
-
-function abrirCarta(pessoa) {
+export function mostrarEnvelope(pessoa) {
   overlay.classList.add("active");
 
-  envelopeScene.innerHTML = `
-    
-    <div class="cosmicEnvelope active">
+  container.innerHTML = `
+  
+<div class="cosmicEnvelope">
 
-        <div class="envelopeGlow"></div>
+    <div class="envelopeGlow"></div>
 
-        <div class="envelopeBody">
+    <div class="envelopeBody">
 
-            <div class="envelopeFlap"></div>
+        <div class="envelopeBack"></div>
 
-            <div class="envelopeSeal">
-                ✦
-            </div>
+        <div class="envelopeLetter">
 
-            <div class="paper">
+            <button class="closeLetter">✕</button>
 
-                <button class="closeLetter">
-                    ✕
-                </button>
+            <h2 class="letterTitle">${pessoa.titulo}</h2>
 
-                <h2>${pessoa.titulo}</h2>
-
-                <div class="typedText"></div>
-
-            </div>
+            <div class="typedText"></div>
 
         </div>
 
+        <div class="envelopeFront"></div>
+
+        <div class="envelopeFlap"></div>
+
     </div>
 
-    `;
+</div>
 
-  /* abre a tampa */
+`;
+
+  const envelope = document.querySelector(".cosmicEnvelope");
 
   setTimeout(() => {
-    document.querySelector(".cosmicEnvelope").classList.add("open");
-  }, 900);
+    envelope.classList.add("active");
+  }, 50);
 
-  /* começa a escrever */
+  setTimeout(() => {
+    envelope.classList.add("open");
+  }, 900);
 
   setTimeout(() => {
     escreverTexto(pessoa.texto);
-  }, 2200);
+  }, 1800);
+
+  document.querySelector(".closeLetter").addEventListener("click", fecharCarta);
 }
 
 /* ==========================
-   EFEITO DIGITAÇÃO
+   FECHAR
+========================== */
+
+export function fecharCarta() {
+  overlay.classList.remove("active");
+  container.innerHTML = "";
+}
+
+/* ==========================
+   DIGITAÇÃO
 ========================== */
 
 function escreverTexto(texto) {
@@ -98,26 +111,14 @@ function escreverTexto(texto) {
   let i = 0;
 
   function escrever() {
-    if (i < texto.length) {
-      destino.innerHTML += texto.charAt(i);
+    if (i >= texto.length) return;
 
-      i++;
+    destino.innerHTML += texto.charAt(i);
 
-      setTimeout(escrever, 22);
-    }
+    i++;
+
+    setTimeout(escrever, 20);
   }
 
   escrever();
 }
-
-/* ==========================
-   FECHAR CARTA
-========================== */
-
-document.addEventListener("click", (e) => {
-  if (!e.target.classList.contains("closeLetter")) return;
-
-  overlay.classList.remove("active");
-
-  envelopeScene.innerHTML = "";
-});

@@ -1,50 +1,43 @@
-[
-  {
-    "id": "s4m",
+{
+  "s4m": {
     "nome": "S4M",
     "titulo": "Ao nosso líder",
     "texto": "Mensagem para o S4M..."
   },
 
-  {
-    "id": "juju",
+  "juju": {
     "nome": "JUJU",
     "titulo": "Para Juju",
     "texto": "Sua mensagem..."
   },
 
-  {
-    "id": "eva",
-    "nome": "EVA",
-    "titulo": "Para Eva",
-    "texto": ""
-  },
-
-  {
-    "id": "marcele",
+  "marcele": {
     "nome": "MARCELE",
     "titulo": "Para Marcele",
-    "texto": ""
+    "texto": "Sua mensagem..."
   },
 
-  {
-    "id": "eden",
+  "eva": {
+    "nome": "EVA",
+    "titulo": "Para Eva",
+    "texto": "Aqui ficará a mensagem da Eva."
+  },
+
+  "eden": {
     "nome": "EDEN",
     "titulo": "Para Eden",
-    "texto": ""
+    "texto": "Aqui ficará a mensagem do Eden."
   },
 
-  {
-    "id": "ellie",
+  "ellie": {
     "nome": "ELLIE",
     "titulo": "Para Ellie",
-    "texto": ""
+    "texto": "Aqui ficará a mensagem da Ellie."
   },
 
-  {
-    "id": "brunna",
+  "brunna": {
     "nome": "BRUNNA",
     "titulo": "Para Brunna",
-    "texto": ""
+    "texto": "Aqui ficará a mensagem da Brunna."
   }
-]
+}
