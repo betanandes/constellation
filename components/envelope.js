@@ -44,8 +44,7 @@ export function mostrarEnvelope(pessoa) {
   overlay.classList.add("active");
 
   container.innerHTML = `
-  
-<div class="cosmicEnvelope">
+<div class="cosmicEnvelope active">
 
     <div class="envelopeGlow"></div>
 
@@ -53,39 +52,45 @@ export function mostrarEnvelope(pessoa) {
 
         <div class="envelopeBack"></div>
 
+        <!-- PAPEL -->
         <div class="envelopeLetter">
+
+            <div class="letterGlow"></div>
 
             <button class="closeLetter">✕</button>
 
             <h2 class="letterTitle">${pessoa.titulo}</h2>
 
-            <div class="typedText"></div>
+            <div class="typedText">${pessoa.texto}</div>
 
         </div>
 
+        <!-- FRENTE -->
         <div class="envelopeFront"></div>
 
+        <!-- TAMPA -->
         <div class="envelopeFlap"></div>
 
     </div>
 
 </div>
-
 `;
 
   const envelope = document.querySelector(".cosmicEnvelope");
 
   setTimeout(() => {
-    envelope.classList.add("active");
-  }, 50);
+    envelope.classList.add("openFlap");
+  }, 500);
 
   setTimeout(() => {
-    envelope.classList.add("open");
-  }, 900);
+    envelope.classList.add("showLetter");
+
+    criarParticulas();
+  }, 1500);
 
   setTimeout(() => {
     escreverTexto(pessoa.texto);
-  }, 1800);
+  }, 2200);
 
   document.querySelector(".closeLetter").addEventListener("click", fecharCarta);
 }
@@ -121,4 +126,30 @@ function escreverTexto(texto) {
   }
 
   escrever();
+}
+
+function criarParticulas() {
+  const carta = document.querySelector(".envelopeLetter");
+
+  if (!carta) return;
+
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement("span");
+
+    p.className = "magicParticle";
+
+    p.style.left = 50 + Math.random() * 160 + "px";
+
+    p.style.top = "20px";
+
+    p.style.setProperty("--x", Math.random() - 0.5);
+
+    p.style.animationDuration = 2 + Math.random() + "s";
+
+    p.style.animationDelay = Math.random() * 0.4 + "s";
+
+    carta.appendChild(p);
+
+    setTimeout(() => p.remove(), 3000);
+  }
 }
