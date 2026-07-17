@@ -1,39 +1,123 @@
-const envelope = document.querySelector(".cosmicEnvelope");
+const overlay = document.querySelector(".overlay");
+const envelopeScene = document.getElementById("envelopeScene");
 
-const envelopeTitle = document.querySelector(".cosmicLetterTitle");
+let integrantes = [];
 
-const envelopeText = document.querySelector(".cosmicLetterText");
+/* ==========================
+   CARREGA O JSON
+========================== */
 
-let cartaAtual = null;
+async function carregarMensagens() {
+  try {
+    const resposta = await fetch("assets/data/integrantes.json");
+    integrantes = await resposta.json();
+  } catch (erro) {
+    console.error("Erro ao carregar integrantes.json", erro);
+  }
+}
 
-function abrirEnvelopeCosmico(pessoa) {
-  if (!envelope) {
-    console.log("Envelope não encontrado");
+carregarMensagens();
 
-    return;
+/* ==========================
+   EVENTOS DOS NOMES
+========================== */
+
+document.querySelectorAll(".member").forEach((member) => {
+  member.addEventListener("click", () => {
+    const nome = member.textContent.replace("✦", "").trim();
+
+    const pessoa = integrantes.find((i) => i.nome === nome);
+
+    if (!pessoa) return;
+
+    abrirCarta(pessoa);
+  });
+});
+
+/* ==========================
+   ABRIR CARTA
+========================== */
+
+function abrirCarta(pessoa) {
+  overlay.classList.add("active");
+
+  envelopeScene.innerHTML = `
+    
+    <div class="cosmicEnvelope active">
+
+        <div class="envelopeGlow"></div>
+
+        <div class="envelopeBody">
+
+            <div class="envelopeFlap"></div>
+
+            <div class="envelopeSeal">
+                ✦
+            </div>
+
+            <div class="paper">
+
+                <button class="closeLetter">
+                    ✕
+                </button>
+
+                <h2>${pessoa.titulo}</h2>
+
+                <div class="typedText"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    `;
+
+  /* abre a tampa */
+
+  setTimeout(() => {
+    document.querySelector(".cosmicEnvelope").classList.add("open");
+  }, 900);
+
+  /* começa a escrever */
+
+  setTimeout(() => {
+    escreverTexto(pessoa.texto);
+  }, 2200);
+}
+
+/* ==========================
+   EFEITO DIGITAÇÃO
+========================== */
+
+function escreverTexto(texto) {
+  const destino = document.querySelector(".typedText");
+
+  destino.innerHTML = "";
+
+  let i = 0;
+
+  function escrever() {
+    if (i < texto.length) {
+      destino.innerHTML += texto.charAt(i);
+
+      i++;
+
+      setTimeout(escrever, 22);
+    }
   }
 
-  cartaAtual = pessoa;
-
-  envelopeTitle.textContent = pessoa.nome;
-
-  envelopeText.textContent = "";
-
-  envelope.classList.add("active");
-
-  setTimeout(() => {
-    envelope.classList.add("open");
-
-    escreverTexto(pessoa.mensagem, envelopeText);
-  }, 1200);
+  escrever();
 }
 
-function fecharEnvelopeCosmico() {
-  if (!envelope) return;
+/* ==========================
+   FECHAR CARTA
+========================== */
 
-  envelope.classList.remove("open");
+document.addEventListener("click", (e) => {
+  if (!e.target.classList.contains("closeLetter")) return;
 
-  setTimeout(() => {
-    envelope.classList.remove("active");
-  }, 800);
-}
+  overlay.classList.remove("active");
+
+  envelopeScene.innerHTML = "";
+});

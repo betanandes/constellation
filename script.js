@@ -1,31 +1,5 @@
-let integrantes = {};
-
-const overlay = document.querySelector(".overlay");
-
-const letterContainer = document.querySelector(".letterContainer");
-
-const letterTitle = document.querySelector(".letterTitle");
-
-const letterText = document.querySelector(".letterText");
-
-const closeLetter = document.querySelector(".closeLetter");
-
-async function carregarMensagens() {
-  const resposta = await fetch("assets/data/integrantes.json");
-
-  integrantes = await resposta.json();
-
-  iniciarConstellation();
-}
-
-carregarMensagens();
-
-closeLetter.addEventListener("click", () => {
-  overlay.classList.remove("active");
-
-  letterContainer.classList.remove("active");
-});
-
-// setTimeout(() => {
-//   abrirEnvelopeCosmico();
-// }, 3000);
+import "./components/universe.js";
+import "./components/particles.js";
+import "./components/parallax.js";
+import "./components/audio.js";
+import "./components/envelope.js";

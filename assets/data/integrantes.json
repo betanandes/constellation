@@ -1,31 +1,50 @@
-{
-  "juju": {
+[
+  {
+    "id": "s4m",
+    "nome": "S4M",
+    "titulo": "Ao nosso líder",
+    "texto": "Mensagem para o S4M..."
+  },
+
+  {
+    "id": "juju",
     "nome": "JUJU",
-    "mensagem": "Aqui ficará a mensagem da Juju."
+    "titulo": "Para Juju",
+    "texto": "Sua mensagem..."
   },
 
-  "marcele": {
-    "nome": "MARCELE",
-    "mensagem": "Aqui ficará a mensagem da Marcele."
-  },
-
-  "eva": {
+  {
+    "id": "eva",
     "nome": "EVA",
-    "mensagem": "Aqui ficará a mensagem da Eva."
+    "titulo": "Para Eva",
+    "texto": ""
   },
 
-  "eden": {
+  {
+    "id": "marcele",
+    "nome": "MARCELE",
+    "titulo": "Para Marcele",
+    "texto": ""
+  },
+
+  {
+    "id": "eden",
     "nome": "EDEN",
-    "mensagem": "Aqui ficará a mensagem do Eden."
+    "titulo": "Para Eden",
+    "texto": ""
   },
 
-  "ellie": {
+  {
+    "id": "ellie",
     "nome": "ELLIE",
-    "mensagem": "Aqui ficará a mensagem da Ellie."
+    "titulo": "Para Ellie",
+    "texto": ""
   },
 
-  "brunna": {
+  {
+    "id": "brunna",
     "nome": "BRUNNA",
-    "mensagem": "Aqui ficará a mensagem da Brunna."
+    "titulo": "Para Brunna",
+    "texto": ""
   }
-}
+]

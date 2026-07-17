@@ -1,18 +1,15 @@
-const canvas = document.getElementById("spaceParticles");
-
+const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 
 let particles = [];
 
-function resizeCanvas() {
+function resize() {
   canvas.width = window.innerWidth;
-
   canvas.height = window.innerHeight;
 }
 
-window.addEventListener("resize", resizeCanvas);
-
-resizeCanvas();
+window.addEventListener("resize", resize);
+resize();
 
 class Particle {
   constructor() {
@@ -21,89 +18,56 @@ class Particle {
 
   reset() {
     this.x = Math.random() * canvas.width;
-
     this.y = Math.random() * canvas.height;
 
-    this.size = Math.random() * 2 + 0.5;
+    this.radius = Math.random() * 2 + 0.5;
 
-    this.speedX = (Math.random() - 0.5) * 0.25;
+    this.speed = Math.random() * 0.25 + 0.05;
 
-    this.speedY = (Math.random() - 0.5) * 0.25;
+    this.opacity = Math.random() * 0.8 + 0.2;
 
-    this.opacity = Math.random();
-
-    this.fade = Math.random() * 0.01 + 0.003;
+    this.blur = Math.random() * 10;
   }
 
   update() {
-    this.x += this.speedX;
+    this.y -= this.speed;
 
-    this.y += this.speedY;
+    if (this.y < -10) {
+      this.y = canvas.height + 10;
 
-    this.opacity += this.fade;
-
-    if (this.opacity >= 1 || this.opacity <= 0) {
-      this.fade *= -1;
-    }
-
-    if (
-      this.x < 0 ||
-      this.x > canvas.width ||
-      this.y < 0 ||
-      this.y > canvas.height
-    ) {
-      this.reset();
+      this.x = Math.random() * canvas.width;
     }
   }
 
   draw() {
     ctx.beginPath();
 
-    ctx.arc(
-      this.x,
+    ctx.fillStyle = `rgba(170,220,255,${this.opacity})`;
 
-      this.y,
+    ctx.shadowBlur = this.blur;
 
-      this.size,
+    ctx.shadowColor = "#8fd6ff";
 
-      0,
-
-      Math.PI * 2,
-    );
-
-    ctx.fillStyle = `
-rgba(
-180,
-220,
-255,
-${this.opacity}
-)
-`;
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
 
     ctx.fill();
   }
 }
 
-function createParticles() {
-  particles = [];
-
-  for (let i = 0; i < 220; i++) {
-    particles.push(new Particle());
-  }
+for (let i = 0; i < 220; i++) {
+  particles.push(new Particle());
 }
 
-function animateParticles() {
+function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  particles.forEach((particle) => {
-    particle.update();
+  particles.forEach((p) => {
+    p.update();
 
-    particle.draw();
+    p.draw();
   });
 
-  requestAnimationFrame(animateParticles);
+  requestAnimationFrame(animate);
 }
 
-createParticles();
-
-animateParticles();
+animate();

@@ -14,58 +14,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
 
   <body>
     <div class="universe">
+      <!-- Fundo -->
+
       <div class="background"></div>
 
       <div class="nebula"></div>
 
       <div class="stars"></div>
 
-      <canvas id="spaceParticles"></canvas>
+      <!-- Partículas -->
 
-      <div class="centerScene">
-        <div class="overlay"></div>
+      <canvas id="particles"></canvas>
 
-        <!-- CARTA ANTIGA (mantida por segurança) -->
+      <!-- Glow -->
 
-        <div class="letterContainer">
-          <div class="letter">
-            <button class="closeLetter">✕</button>
+      <div class="glow"></div>
 
-            <h2 class="letterTitle"></h2>
+      <!-- Planeta -->
 
-            <p class="letterText"></p>
-          </div>
-        </div>
-
-        <div class="glow"></div>
-
-        <!-- ENVELOPE CÓSMICO -->
-
-        <div class="cosmicEnvelope">
-          <div class="envelopeGlow"></div>
-
-          <div class="envelopeBody">
-            <div class="envelopeFlap"></div>
-
-            <div class="envelopeSeal">✦</div>
-
-            <div class="cosmicLetter">
-              <h2 class="cosmicLetterTitle"></h2>
-
-              <p class="cosmicLetterText"></p>
-            </div>
-          </div>
-        </div>
-
-        <!-- PLANETA -->
-
+      <section class="centerScene">
         <div class="planet">
           <div class="planetGlow"></div>
 
@@ -75,43 +49,41 @@
             alt="Planeta"
           />
         </div>
+      </section>
 
-        <!-- CONSTELAÇÃO -->
+      <!-- Constelação -->
 
-        <div class="constellation">
-          <div class="member s4m">✦ S4M</div>
+      <section class="constellation">
+        <div class="member s4m">✦ S4M</div>
 
-          <div class="member juju">✦ JUJU</div>
+        <div class="member eva">✦ EVA</div>
 
-          <div class="member marcele">✦ MARCELE</div>
+        <div class="member juju">✦ JUJU</div>
 
-          <div class="member eva">✦ EVA</div>
+        <div class="member marcele">✦ MARCELE</div>
 
-          <div class="member eden">✦ EDEN</div>
+        <div class="member brunna">✦ BRUNNA</div>
 
-          <div class="member ellie">✦ ELLIE</div>
+        <div class="member eden">✦ EDEN</div>
 
-          <div class="member brunna">✦ BRUNNA</div>
-        </div>
-      </div>
+        <div class="member ellie">✦ ELLIE</div>
+      </section>
+
+      <!-- Mensagem -->
+
+      <div class="startMessage">✨ Clique em uma estrela para começar ✨</div>
+
+      <!-- Overlay -->
+
+      <div class="overlay"></div>
+
+      <!-- Envelope (próxima etapa) -->
+
+      <div id="envelopeScene"></div>
     </div>
 
-    <!-- COMPONENTES -->
+    <!-- JavaScript -->
 
-    <script src="components/typewriter.js"></script>
-
-    <script src="components/audio.js"></script>
-
-    <script src="components/constellation.js"></script>
-
-    <script src="components/parallax.js"></script>
-
-    <script src="components/particles.js"></script>
-
-    <script src="components/universe.js"></script>
-
-    <script src="components/envelope.js"></script>
-
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
