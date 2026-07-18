@@ -297,7 +297,7 @@ body {
 /* CARTA */
 
 .envelopeLetter {
-  position: absolute;
+  position: relative;
   left: 50%;
   width: 82%;
   height: 260px;
@@ -305,12 +305,13 @@ body {
   border-radius: 16px;
   padding: 30px;
   color: #273247;
-  bottom: 20px; /* Escondida na base */
+  bottom: -20px; /* Escondida na base */
   transform: translateX(-50%) translateY(0) rotateX(-20deg);
   transform-origin: bottom center;
   transition:
     bottom 1.5s cubic-bezier(0.19, 1, 0.22, 1),
     transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden;
   z-index: 1; /* Abaixo da Frente (z-index 5) */
 }
 
@@ -552,4 +553,37 @@ body {
 /* O brilho aparece quando a carta sobe */
 .cosmicEnvelope.showLetter .letterTrail {
   opacity: 1;
+}
+
+/* ==========================================
+   SHIMMER EFFECT
+========================================== */
+
+/* Efeito de brilho que passa pela carta */
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 5;
+  animation: shimmerEffect 5s infinite linear;
+}
+
+@keyframes shimmerEffect {
+  0% {
+    left: -100%;
+  }
+  30%,
+  100% {
+    left: 150%;
+  } /* Tempo maior entre os brilhos para ficar mais sutil */
 }

@@ -7,35 +7,6 @@ const planet = document.querySelector(".planet");
    FEIXE DE LUZ
 ========================== */
 
-// export function desenharFeixe(member) {
-//   const origem = member.getBoundingClientRect();
-//   const destino = planet.getBoundingClientRect();
-
-//   const x1 = origem.left + origem.width / 2;
-//   const y1 = origem.top + origem.height / 2;
-
-//   const x2 = destino.left + destino.width / 2;
-//   const y2 = destino.top + destino.height / 2;
-
-//   const dx = x2 - x1;
-//   const dy = y2 - y1;
-
-//   const distancia = Math.sqrt(dx * dx + dy * dy);
-
-//   const angulo = Math.atan2(dy, dx) * (180 / Math.PI) - 90;
-
-//   beam.style.left = `${x1}px`;
-//   beam.style.top = `${y1}px`;
-//   beam.style.height = `${distancia}px`;
-//   beam.style.transform = `rotate(${angulo}deg)`;
-
-//   beam.classList.add("active");
-
-//   setTimeout(() => {
-//     beam.classList.remove("active");
-//   }, 700);
-// }
-
 export function desenharFeixe(member) {
   const rect = member.getBoundingClientRect();
 
@@ -68,6 +39,8 @@ export function mostrarEnvelope(pessoa) {
 
         <!-- PAPEL -->
         <div class="envelopeLetter">
+            <div class="shimmer"></div>
+            
             <div class="letterTrail"></div>
 
             <div class="letterGlow"></div>
