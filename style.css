@@ -1,5 +1,5 @@
 /* ==========================================================
-   RESET & BODY
+    RESET & BODY
 ========================================================== */
 * {
   margin: 0;
@@ -16,7 +16,7 @@ body {
 }
 
 /* ==========================================================
-   UNIVERSE & BACKGROUND
+    UNIVERSE & BACKGROUND
 ========================================================== */
 .universe {
   position: relative;
@@ -51,7 +51,7 @@ body {
 }
 
 /* ==========================================================
-   PARTICLES & SCENE
+    PARTICLES & SCENE
 ========================================================== */
 #particles {
   position: absolute;
@@ -118,7 +118,7 @@ body {
 }
 
 /* ==========================================================
-   MENSAGEM DE INÍCIO
+    MENSAGEM DE INÍCIO
 ========================================================== */
 .startMessage {
   position: absolute;
@@ -142,7 +142,7 @@ body {
 }
 
 /* ==========================================================
-   CONSTELLATION
+    CONSTELLATION
 ========================================================== */
 .constellation {
   position: absolute;
@@ -178,7 +178,10 @@ body {
   left: 50%;
   top: 10%;
   transform: translateX(-50%);
+  pointer-events: none !important;
+  cursor: default !important;
 }
+
 .eva {
   left: 10%;
   top: 25%;
@@ -206,64 +209,60 @@ body {
 
 /* Estilo base para os novos nomes */
 .member.extra {
-  font-size: clamp(10px, 1.2vw, 14px); /* Um pouco menor que os principais */
-  opacity: 0.7; /* Mais suave que os membros centrais */
+  font-size: clamp(10px, 1.2vw, 14px);
+  opacity: 0.7;
   font-style: italic;
   cursor: pointer;
   transition: 0.3s;
   z-index: 1000;
 }
-
 .member.extra:hover {
   opacity: 1;
   text-shadow: 0 0 8px #ffffff;
 }
-
 .member.hidden {
   opacity: 0;
-  pointer-events: none; /* Impede que você clique neles depois de sumirem */
+  pointer-events: none;
   transition: opacity 0.5s ease;
 }
 
-/* Posicionamento (ajuste os valores % conforme necessário) */
-/* Topo Esquerdo */
+/* Posicionamento extra */
 .leon {
   left: 15%;
   top: 15%;
 }
-
-/* Meio Esquerdo */
 .viana {
   left: 5%;
   top: 30%;
 }
-
-/* Base Esquerdo */
 .hanna {
   left: 20%;
   bottom: 20%;
 }
-
-/* Topo Direito */
 .juli {
   right: 15%;
   top: 15%;
 }
-
-/* Meio Direito */
 .toji {
   right: 5%;
   top: 45%;
 }
-
-/* Base Direito */
 .ariel {
   right: 20%;
   bottom: 15%;
 }
 
+/* Ajustes Responsivos (iPhone SE/Telas Pequenas) */
+@media (max-width: 480px) {
+  .member,
+  .member.extra {
+    font-size: clamp(8px, 3vw, 11px) !important;
+    letter-spacing: 0.5px;
+  }
+}
+
 /* ==========================================================
-   ENVELOPE & LETTER SYSTEM
+    ENVELOPE & LETTER SYSTEM
 ========================================================== */
 .overlay {
   position: fixed;
@@ -330,12 +329,12 @@ body {
   width: 100%;
   height: 100%;
   background: #fbfaf6;
-  border-radius: 18px; /* Combinando com o raio do envelope */
+  border-radius: 18px;
   padding: 30px;
   color: #273247;
   transform-origin: bottom center;
   transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-  overflow: hidden; /* Removida a barra de scroll */
+  overflow: hidden;
   z-index: 10;
 }
 
@@ -368,21 +367,18 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 64%; /* Esta altura define o quanto da carta fica coberta */
+  height: 64%;
   background: linear-gradient(180deg, #27497b, #173152);
   border-radius: 0 0 18px 18px;
-  z-index: 5; /* Fica acima do envelopeBack */
+  z-index: 5;
   pointer-events: none;
 }
 
-/* Garante que o papel, ao subir, fique acima da frente (z-index 20) */
 .cosmicEnvelope.showLetter .envelopeLetter {
   bottom: 0;
   transform: translateY(-20%) rotateX(0deg);
   z-index: 20;
 }
-
-/* Garante que a frente não suba junto com o papel */
 .cosmicEnvelope.showLetter .envelopeFront {
   z-index: 5;
 }
@@ -411,7 +407,7 @@ body {
 }
 
 /* ==========================================================
-   ANIMATIONS & EFFECTS
+    ANIMATIONS & EFFECTS
 ========================================================== */
 #lightBeam {
   position: fixed;
