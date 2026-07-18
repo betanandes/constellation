@@ -227,6 +227,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  perspective: 1500px;
 }
 
 /* envelope */
@@ -273,9 +274,10 @@ body {
 /* corpo */
 
 .envelopeBody {
-  position: absolute;
-
-  inset: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
 /* fundo */
@@ -296,110 +298,95 @@ body {
 
 .envelopeLetter {
   position: absolute;
-
   left: 50%;
-
-  bottom: 20px;
-
-  transform: translateX(-50%);
-
   width: 82%;
   height: 260px;
-
   background: #fbfaf6;
-
   border-radius: 16px;
-
   padding: 30px;
-
   color: #273247;
-
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
-
-  z-index: 2;
-
+  bottom: 20px; /* Escondida na base */
+  transform: translateX(-50%) translateY(0) rotateX(-20deg);
+  transform-origin: bottom center;
   transition:
-    bottom 1.25s cubic-bezier(0.23, 1, 0.32, 1),
-    transform 1.25s cubic-bezier(0.23, 1, 0.32, 1);
-
-  overflow: hidden;
+    bottom 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 1; /* Abaixo da Frente (z-index 5) */
 }
 
 /* tampa */
 
 .envelopeFlap {
   position: absolute;
-
   top: 0;
-
   width: 100%;
-  height: 64%;
-
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-
-  background: linear-gradient(145deg, #2d5387, #193457);
-
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  background: linear-gradient(
+    145deg,
+    #2d5387,
+    #193457
+  ); /* Adicione a cor de volta */
   transform-origin: top center;
+  transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 10; /* Garante que ela esteja acima da frente e da carta */
+}
 
-  transition: 1s;
-
-  z-index: 5;
+/* Melhoria na animação da tampa */
+.cosmicEnvelope.openFlap .envelopeFlap {
+  transform: rotateX(-180deg);
+  z-index: 1; /* Abaixa após abrir para não atrapalhar a carta subindo */
 }
 
 /* frente */
 
 .envelopeFront {
   position: absolute;
-
   left: 0;
   bottom: 0;
-
   width: 100%;
   height: 64%;
-
   background: linear-gradient(180deg, #27497b, #173152);
-
   border-radius: 0 0 18px 18px;
-
-  z-index: 4;
+  z-index: 5; /* Garante que a frente esconda a carta */
+  pointer-events: none; /* Para não bloquear cliques */
 }
 
-/* abertura */
-
-.cosmicEnvelope.openFlap .envelopeFlap {
-  transform: perspective(1200px) rotateX(178deg);
-
-  transition: transform 0.9s cubic-bezier(0.23, 1, 0.32, 1);
-
-  z-index: 1;
-}
-
+/* Melhoria na física da carta */
 .cosmicEnvelope.showLetter .envelopeLetter {
-  bottom: 105px;
-
-  transform: translateX(-50%) scale(1);
-
-  z-index: 6;
+  bottom: 105px; /* Aumentado para sair mais do envelope */
+  transform: translateX(-50%) translateY(0) rotateX(0deg);
+  transition:
+    bottom 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 10;
 }
 
 /* ==========================================================
    LIGHT BEAM & ANIMATIONS
 ========================================================== */
 #lightBeam {
-  position: absolute;
-  width: 4px;
-  height: 0;
+  position: fixed;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.6),
+    transparent 70%
+  );
   opacity: 0;
-  z-index: 180;
   pointer-events: none;
-  background: linear-gradient(to bottom, white, #66bfff, transparent);
+  z-index: 9999;
+  /* Transição mais longa para parecer "orgânica" */
   transition:
-    opacity 0.2s,
-    height 0.5s ease; /* Adicionamos transição na altura */
-  transform-origin: top center; /* Essencial para o feixe nascer da estrela */
+    opacity 0.8s ease-out,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.1);
 }
+
 #lightBeam.active {
   opacity: 1;
+  transform: scale(1.8); /* Expansão um pouco maior */
 }
 
 @keyframes nebulaMove {
@@ -515,34 +502,54 @@ body {
 
 .magicParticle {
   position: absolute;
-
-  width: 5px;
-  height: 5px;
-
+  width: 6px; /* Ajustado para um meio-termo elegante */
+  height: 6px;
+  background: #ffffff;
   border-radius: 50%;
-
-  background: #8fd8ff;
-
   box-shadow:
-    0 0 8px #8fd8ff,
-    0 0 18px #4ea8ff,
-    0 0 28px #4ea8ff;
-
+    0 0 12px #8fd8ff,
+    0 0 25px #4ea8ff;
   pointer-events: none;
-
-  animation: magicRise forwards;
+  opacity: 0;
+  /* Animação de subida mais lenta e suave */
+  animation: magicRise 4s ease-out forwards;
 }
 
 @keyframes magicRise {
-  from {
-    opacity: 1;
-
-    transform: translate(0, 0) scale(1);
-  }
-
-  to {
+  0% {
     opacity: 0;
-
-    transform: translate(calc(var(--x) * 180px), -220px) scale(0);
+    transform: translateY(0) scale(0.5);
   }
+  20% {
+    opacity: 1; /* O brilho se mantém forte por mais tempo */
+    transform: translateY(-40px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-300px) scale(0.2); /* Sobe mais alto */
+  }
+}
+
+.letterTrail {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 40px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(100, 200, 255, 0.6),
+    transparent 70%
+  );
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* O brilho aparece quando a carta sobe */
+.cosmicEnvelope.showLetter .letterTrail {
+  opacity: 1;
 }

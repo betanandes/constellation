@@ -7,33 +7,47 @@ const planet = document.querySelector(".planet");
    FEIXE DE LUZ
 ========================== */
 
+// export function desenharFeixe(member) {
+//   const origem = member.getBoundingClientRect();
+//   const destino = planet.getBoundingClientRect();
+
+//   const x1 = origem.left + origem.width / 2;
+//   const y1 = origem.top + origem.height / 2;
+
+//   const x2 = destino.left + destino.width / 2;
+//   const y2 = destino.top + destino.height / 2;
+
+//   const dx = x2 - x1;
+//   const dy = y2 - y1;
+
+//   const distancia = Math.sqrt(dx * dx + dy * dy);
+
+//   const angulo = Math.atan2(dy, dx) * (180 / Math.PI) - 90;
+
+//   beam.style.left = `${x1}px`;
+//   beam.style.top = `${y1}px`;
+//   beam.style.height = `${distancia}px`;
+//   beam.style.transform = `rotate(${angulo}deg)`;
+
+//   beam.classList.add("active");
+
+//   setTimeout(() => {
+//     beam.classList.remove("active");
+//   }, 700);
+// }
+
 export function desenharFeixe(member) {
-  const origem = member.getBoundingClientRect();
-  const destino = planet.getBoundingClientRect();
+  const rect = member.getBoundingClientRect();
 
-  const x1 = origem.left + origem.width / 2;
-  const y1 = origem.top + origem.height / 2;
-
-  const x2 = destino.left + destino.width / 2;
-  const y2 = destino.top + destino.height / 2;
-
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-
-  const distancia = Math.sqrt(dx * dx + dy * dy);
-
-  const angulo = Math.atan2(dy, dx) * (180 / Math.PI) - 90;
-
-  beam.style.left = `${x1}px`;
-  beam.style.top = `${y1}px`;
-  beam.style.height = `${distancia}px`;
-  beam.style.transform = `rotate(${angulo}deg)`;
+  // Posiciona o brilho no centro do nome clicado
+  beam.style.left = `${rect.left + rect.width / 2 - 75}px`;
+  beam.style.top = `${rect.top + rect.height / 2 - 75}px`;
 
   beam.classList.add("active");
 
   setTimeout(() => {
     beam.classList.remove("active");
-  }, 700);
+  }, 600);
 }
 
 /* ==========================
@@ -54,6 +68,7 @@ export function mostrarEnvelope(pessoa) {
 
         <!-- PAPEL -->
         <div class="envelopeLetter">
+            <div class="letterTrail"></div>
 
             <div class="letterGlow"></div>
 
@@ -78,19 +93,19 @@ export function mostrarEnvelope(pessoa) {
 
   const envelope = document.querySelector(".cosmicEnvelope");
 
+  // Dentro de mostrarEnvelope:
   setTimeout(() => {
     envelope.classList.add("openFlap");
-  }, 500);
+  }, 300); // Começa mais cedo
 
   setTimeout(() => {
     envelope.classList.add("showLetter");
-
     criarParticulas();
-  }, 1500);
+  }, 1000); // Sincronizado com a abertura da tampa
 
   setTimeout(() => {
     escreverTexto(pessoa.texto);
-  }, 2200);
+  }, 2000); // Começa a digitar após a carta chegar na posição
 
   document.querySelector(".closeLetter").addEventListener("click", fecharCarta);
 }
@@ -110,46 +125,46 @@ export function fecharCarta() {
 
 function escreverTexto(texto) {
   const destino = document.querySelector(".typedText");
-
   destino.innerHTML = "";
 
+  // Adicionamos a classe para o cursor existir
+  destino.classList.add("typing");
+
   let i = 0;
-
   function escrever() {
-    if (i >= texto.length) return;
-
+    if (i >= texto.length) {
+      // Opcional: remover o cursor após terminar se desejar
+      // destino.classList.remove("typing");
+      return;
+    }
     destino.innerHTML += texto.charAt(i);
-
     i++;
-
-    setTimeout(escrever, 20);
+    setTimeout(escrever, 35); // Ajustei para 35ms, um pouco mais natural
   }
-
   escrever();
 }
 
 function criarParticulas() {
   const carta = document.querySelector(".envelopeLetter");
-
   if (!carta) return;
 
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 30; i++) {
     const p = document.createElement("span");
-
     p.className = "magicParticle";
 
-    p.style.left = 50 + Math.random() * 160 + "px";
+    p.style.left = `${Math.random() * 100}%`;
+    p.style.bottom = "0px";
 
-    p.style.top = "20px";
+    const xDist = (Math.random() - 0.5) * 150; // Maior espalhamento horizontal
+    p.style.setProperty("--x", xDist + "px");
 
-    p.style.setProperty("--x", Math.random() - 0.5);
-
-    p.style.animationDuration = 2 + Math.random() + "s";
-
-    p.style.animationDelay = Math.random() * 0.4 + "s";
+    // Animação mais lenta para um efeito cinematográfico
+    p.style.animationDuration = `${3 + Math.random() * 2}s`;
+    p.style.animationDelay = `${Math.random() * 0.5}s`;
 
     carta.appendChild(p);
 
-    setTimeout(() => p.remove(), 3000);
+    // Aumentamos o tempo de vida para coincidir com a nova animação
+    setTimeout(() => p.remove(), 5000);
   }
 }
