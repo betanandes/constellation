@@ -2,6 +2,8 @@ import "./components/universe.js";
 import "./components/particles.js";
 import "./components/parallax.js";
 import "./components/audio.js";
+
+import { tocarSom, iniciarMusica } from "./components/audio.js";
 import { mostrarEnvelope, desenharFeixe } from "./components/envelope.js";
 
 let integrantes = {};
@@ -18,6 +20,9 @@ async function carregarDados() {
 carregarDados().then(() => {
   document.querySelectorAll(".member").forEach((member) => {
     member.addEventListener("click", () => {
+      // No seu evento de clique:
+      tocarSom("click");
+
       const nome = member.textContent.replace("✦", "").trim().toLowerCase();
       const pessoa = integrantes[nome];
 
@@ -33,3 +38,11 @@ carregarDados().then(() => {
     });
   });
 });
+
+document.body.addEventListener(
+  "click",
+  () => {
+    iniciarMusica();
+  },
+  { once: true },
+); // Toca uma vez apenas no primeiro clique na página

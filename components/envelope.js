@@ -25,6 +25,8 @@ export function desenharFeixe(member) {
    ENVELOPE
 ========================== */
 
+import { tocarSom } from "./audio.js";
+
 export function mostrarEnvelope(pessoa) {
   overlay.classList.add("active");
 
@@ -79,6 +81,12 @@ export function mostrarEnvelope(pessoa) {
   setTimeout(() => {
     escreverTexto(pessoa.texto);
   }, 2000); // Começa a digitar após a carta chegar na posição
+
+  tocarSom("open"); // Som da tampa abrindo
+
+  setTimeout(() => {
+    tocarSom("slide"); // Som da carta subindo
+  }, 1300);
 
   document.querySelector(".closeLetter").addEventListener("click", fecharCarta);
 }

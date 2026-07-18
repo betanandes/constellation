@@ -1,26 +1,14 @@
-const universeAudio = new Audio("assets/audio/music.mp3");
+// audio.js
+const music = new Audio("assets/audio/music.mp3"); // Caminho corrigido
+music.loop = true;
+music.volume = 0.2;
 
-universeAudio.loop = true;
+export function iniciarMusica() {
+  music.play().catch((e) => console.log("Aguardando interação."));
+}
 
-function iniciarAudio() {
-  if (universeAudio.paused) {
-    universeAudio.volume = 0;
-
-    universeAudio
-      .play()
-      .then(() => {
-        let volume = 0;
-
-        const fade = setInterval(() => {
-          volume += 0.02;
-
-          universeAudio.volume = volume;
-
-          if (volume >= 0.6) {
-            clearInterval(fade);
-          }
-        }, 100);
-      })
-      .catch(() => {});
-  }
+export function tocarSom(efeito) {
+  const audio = new Audio(`assets/audio/${efeito}.mp3`); // Caminho corrigido
+  audio.volume = 0.5;
+  audio.play().catch((e) => console.error("Erro ao tocar som:", e));
 }
