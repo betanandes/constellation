@@ -120,7 +120,7 @@ function escreverTexto(texto) {
     }
     destino.innerHTML += texto.charAt(i);
     i++;
-    setTimeout(escrever, 35); // Ajustei para 35ms, um pouco mais natural
+    setTimeout(escrever, 10); // Ajustei para 35ms, um pouco mais natural
   }
   escrever();
 }

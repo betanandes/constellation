@@ -2,17 +2,11 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Constellation</title>
-
+    <title>KYNIX</title>
     <link rel="stylesheet" href="style.css" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -22,27 +16,20 @@
   <body>
     <div class="universe">
       <!-- Fundo -->
-
       <div class="background"></div>
-
       <div class="nebula"></div>
-
       <div class="stars"></div>
 
       <!-- Partículas -->
-
       <canvas id="particles"></canvas>
 
       <!-- Glow -->
-
       <div class="glow"></div>
 
       <!-- Planeta -->
-
       <section class="centerScene">
         <div class="planet">
           <div class="planetGlow"></div>
-
           <img
             src="assets/img/planet.png"
             class="planet-texture"
@@ -51,31 +38,30 @@
         </div>
       </section>
 
-      <!-- Constelação -->
-
-      <section class="constellation">
+      <!-- Constelação (Grupo central) -->
+      <div class="constellation">
         <div class="member s4m">✦ S4M</div>
-
         <div class="member eva">✦ EVA</div>
-
         <div class="member juju">✦ JUJU</div>
-
         <div class="member marcele">✦ MARCELE</div>
-
         <div class="member brunna">✦ BRUNNA</div>
-
         <div class="member eden">✦ EDEN</div>
-
         <div class="member ellie">✦ ELLIE</div>
-      </section>
+      </div>
+
+      <!-- Novos nomes (estrelas soltas espalhadas pela tela) -->
+      <div class="member extra leon">✦ Leon</div>
+      <div class="member extra juli">✦ Juli</div>
+      <div class="member extra viana">✦ Viana</div>
+      <div class="member extra hanna">✦ Hanna</div>
+      <div class="member extra toji">✦ Toji</div>
+      <div class="member extra ariel">✦ Ariel</div>
 
       <!-- Mensagem -->
-
-      <div class="startMessage">✨ Clique em uma estrela para começar ✨</div>
+      <div class="startMessage">Clique em uma estrela para começar</div>
     </div>
 
-    <!-- Overlay -->
-
+    <!-- Overlay (Fora do universe para garantir sobreposição total) -->
     <div class="overlay">
       <div id="envelopeScene"></div>
     </div>
@@ -83,7 +69,6 @@
     <div id="lightBeam"></div>
 
     <!-- JavaScript -->
-
     <script type="module" src="script.js"></script>
   </body>
 </html>

@@ -1,43 +1,30 @@
 {
-  "s4m": {
-    "nome": "S4M",
-    "titulo": "Ao nosso líder",
-    "texto": "Mensagem para o S4M..."
-  },
-
-  "juju": {
-    "nome": "JUJU",
-    "titulo": "Para Juju",
-    "texto": "Sua mensagem..."
-  },
-
-  "marcele": {
-    "nome": "MARCELE",
-    "titulo": "Para Marcele",
-    "texto": "Sua mensagem..."
-  },
-
   "eva": {
-    "nome": "EVA",
-    "titulo": "Para Eva",
-    "texto": "Aqui ficará a mensagem da Eva."
+    "titulo": "Para a Eva",
+    "texto": "Eva, você é a estrela que guia essa constelação. Sua dedicação ilumina nossos dias e inspira todos ao seu redor."
   },
-
-  "eden": {
-    "nome": "EDEN",
-    "titulo": "Para Eden",
-    "texto": "Aqui ficará a mensagem do Eden."
+  "juju": {
+    "titulo": "Para a Juju",
+    "texto": "obrigado por acreditar no KYNIX quando tudo recomeçou. Sua permanência, sua confiança e sua voz foram essenciais para manter esse sonho vivo. Como nossa Main Vocal, você emociona em cada música e torna o grupo ainda mais especial. Você é parte fundamental desta história e deste novo começo. Obrigado por caminhar comigo.\n\nCom carinho, S4M 🤍"
   },
-
-  "ellie": {
-    "nome": "ELLIE",
-    "titulo": "Para Ellie",
-    "texto": "Aqui ficará a mensagem da Ellie."
+  "marcele": {
+    "titulo": "Para a Marcele",
+    "texto": "Marcele, sua clareza e inteligência fazem toda a diferença. É um privilégio compartilhar essa jornada com você."
   },
-
   "brunna": {
-    "nome": "BRUNNA",
-    "titulo": "Para Brunna",
-    "texto": "Aqui ficará a mensagem da Brunna."
+    "titulo": "Para a Brunna",
+    "texto": "Brunna, sua força e autenticidade são admiradas por todos. Nunca perca esse brilho especial."
+  },
+  "eden": {
+    "titulo": "Para o Eden",
+    "texto": "Eden, sua presença traz equilíbrio e sabedoria. Que sua trajetória continue sendo brilhante e cheia de conquistas."
+  },
+  "ellie": {
+    "titulo": "Para a Ellie",
+    "texto": "Ellie, sua criatividade não tem limites. Continue explorando novos horizontes e transformando o mundo ao seu redor."
+  },
+  "s4m": {
+    "titulo": "Para o S4m",
+    "texto": "S4m, sua visão técnica e dedicação são os pilares que mantêm nossa constelação unida. Seguimos em frente juntos."
   }
 }

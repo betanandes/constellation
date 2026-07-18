@@ -7,6 +7,7 @@ import { tocarSom, iniciarMusica } from "./components/audio.js";
 import { mostrarEnvelope, desenharFeixe } from "./components/envelope.js";
 
 let integrantes = {};
+const startMessage = document.querySelector(".startMessage");
 
 async function carregarDados() {
   try {
@@ -17,22 +18,44 @@ async function carregarDados() {
   }
 }
 
+// Função para reexibir a mensagem e os membros ao fechar o envelope
+function configurarFechamento() {
+  const closeBtn = document.querySelector(".closeLetter");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      // Reexibe a mensagem inicial
+      startMessage.classList.remove("hidden");
+
+      // Reexibe todos os membros (incluindo os extras)
+      document.querySelectorAll(".member").forEach((m) => {
+        m.classList.remove("hidden");
+      });
+    });
+  }
+}
+
 carregarDados().then(() => {
   document.querySelectorAll(".member").forEach((member) => {
     member.addEventListener("click", () => {
-      // No seu evento de clique:
       tocarSom("click");
+
+      // Esconde a mensagem ao clicar no membro
+      startMessage.classList.add("hidden");
+
+      // Esconde TODOS os membros (incluindo os extras) ao clicar em um deles
+      document
+        .querySelectorAll(".member")
+        .forEach((m) => m.classList.add("hidden"));
 
       const nome = member.textContent.replace("✦", "").trim().toLowerCase();
       const pessoa = integrantes[nome];
 
       if (pessoa) {
-        // 1. Executa o efeito visual do feixe
         desenharFeixe(member);
 
-        // 2. Aguarda um pouco para o feixe "chegar" antes de abrir o envelope
         setTimeout(() => {
           mostrarEnvelope(pessoa);
+          configurarFechamento(); // Garante que o botão de fechar está escutando
         }, 900);
       }
     });
@@ -45,4 +68,4 @@ document.body.addEventListener(
     iniciarMusica();
   },
   { once: true },
-); // Toca uma vez apenas no primeiro clique na página
+);

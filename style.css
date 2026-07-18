@@ -11,6 +11,8 @@ body {
   background: #020817;
   color: #fff;
   font-family: "Cinzel", serif;
+  width: 100vw;
+  height: 100vh;
 }
 
 /* ==========================================================
@@ -49,7 +51,7 @@ body {
 }
 
 /* ==========================================================
-   PARTICLES (Garantindo que apareçam)
+   PARTICLES & SCENE
 ========================================================== */
 #particles {
   position: absolute;
@@ -58,16 +60,13 @@ body {
   pointer-events: none;
 }
 
-/* ==========================================================
-   CENTER SCENE & ELEMENTS
-========================================================== */
 .centerScene {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
-  height: 900px;
+  width: 80vmin;
+  height: 80vmin;
   z-index: 10;
   pointer-events: none;
 }
@@ -76,8 +75,8 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 720px;
-  height: 720px;
+  width: 60vmin;
+  height: 60vmin;
   background: url("assets/img/glow.png") center/contain no-repeat;
   opacity: 0.55;
   z-index: 1;
@@ -89,8 +88,8 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 620px;
-  height: 620px;
+  width: 45vmin;
+  height: 45vmin;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -100,8 +99,8 @@ body {
 }
 .planetGlow {
   position: absolute;
-  width: 520px;
-  height: 520px;
+  width: 84%;
+  height: 84%;
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -119,14 +118,38 @@ body {
 }
 
 /* ==========================================================
+   MENSAGEM DE INÍCIO
+========================================================== */
+.startMessage {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 1000;
+  pointer-events: none;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 100%;
+  transition: opacity 0.5s ease;
+}
+.startMessage.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================
    CONSTELLATION
 ========================================================== */
 .constellation {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 900px;
-  height: 900px;
+  width: 85vmin;
+  height: 85vmin;
   transform: translate(-50%, -50%);
   z-index: 100;
   pointer-events: none;
@@ -135,143 +158,155 @@ body {
   position: absolute;
   pointer-events: auto;
   cursor: pointer;
-  font-size: 20px;
+  font-size: clamp(12px, 1.5vw, 18px);
   font-weight: 500;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: white;
   transition: 0.35s;
   text-shadow:
     0 0 6px rgba(255, 255, 255, 0.9),
-    0 0 15px rgba(130, 200, 255, 0.6),
-    0 0 30px rgba(90, 170, 255, 0.45);
+    0 0 15px rgba(130, 200, 255, 0.6);
 }
 .member:hover,
 .member.selected {
-  transform: scale(1.12);
+  transform: scale(1.1);
   filter: drop-shadow(0 0 10px #89d0ff);
 }
 
 .s4m {
   left: 50%;
-  top: 120px;
+  top: 5%;
   transform: translateX(-50%);
 }
 .eva {
-  left: 180px;
-  top: 250px;
+  left: 10%;
+  top: 25%;
 }
 .juju {
-  right: 180px;
-  top: 250px;
+  right: 10%;
+  top: 25%;
 }
 .marcele {
-  left: 80px;
-  top: 440px;
+  left: 0%;
+  top: 50%;
 }
 .brunna {
-  right: 80px;
-  top: 440px;
+  right: 0%;
+  top: 50%;
 }
 .eden {
-  left: 180px;
-  bottom: 220px;
+  left: 15%;
+  bottom: 15%;
 }
 .ellie {
-  right: 180px;
-  bottom: 220px;
+  right: 15%;
+  bottom: 15%;
+}
+
+/* Estilo base para os novos nomes */
+.member.extra {
+  font-size: clamp(10px, 1.2vw, 14px); /* Um pouco menor que os principais */
+  opacity: 0.7; /* Mais suave que os membros centrais */
+  font-style: italic;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.member.extra:hover {
+  opacity: 1;
+  text-shadow: 0 0 8px #ffffff;
+}
+
+.member.hidden {
+  opacity: 0;
+  pointer-events: none; /* Impede que você clique neles depois de sumirem */
+  transition: opacity 0.5s ease;
+}
+
+/* Posicionamento (ajuste os valores % conforme necessário) */
+/* Topo Esquerdo */
+.leon {
+  left: 15%;
+  top: 15%;
+}
+
+/* Meio Esquerdo */
+.viana {
+  left: 5%;
+  top: 30%;
+}
+
+/* Base Esquerdo */
+.hanna {
+  left: 20%;
+  bottom: 20%;
+}
+
+/* Topo Direito */
+.juli {
+  right: 15%;
+  top: 15%;
+}
+
+/* Meio Direito */
+.toji {
+  right: 5%;
+  top: 45%;
+}
+
+/* Base Direito */
+.ariel {
+  right: 20%;
+  bottom: 15%;
 }
 
 /* ==========================================================
    ENVELOPE & LETTER SYSTEM
 ========================================================== */
-
-/* ==========================================================
-   OVERLAY
-========================================================== */
-
 .overlay {
   position: fixed;
   inset: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: rgba(2, 8, 23, 0.82);
   backdrop-filter: blur(10px);
-
   opacity: 0;
   visibility: hidden;
-
   transition: 0.5s;
-
   z-index: 900;
 }
-
 .overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
-/* ==========================================================
-   ENVELOPE
-========================================================== */
-
 #envelopeScene {
   position: relative;
-
-  width: 520px;
-  height: 520px;
-
+  width: min(90vw, 550px);
+  height: min(90vw, 550px);
   display: flex;
   justify-content: center;
   align-items: center;
   perspective: 1500px;
 }
 
-/* envelope */
-
 .cosmicEnvelope {
   position: relative;
-
-  width: 360px;
-  height: 280px;
-
+  width: min(85vw, 400px);
+  aspect-ratio: 10/7;
   opacity: 0;
-
   transform: scale(0.7);
-
   transition:
     transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
     opacity 0.8s;
 }
-
 .cosmicEnvelope.active {
   opacity: 1;
   transform: scale(1);
 }
-
-/* brilho */
-
-.envelopeGlow {
-  position: absolute;
-  inset: -80px;
-
-  border-radius: 50%;
-
-  background: radial-gradient(
-    circle,
-    rgba(90, 170, 255, 0.35),
-    transparent 70%
-  );
-
-  filter: blur(35px);
-
-  animation: glowPulseEnvelope 5s infinite;
-}
-
-/* corpo */
 
 .envelopeBody {
   position: relative;
@@ -279,43 +314,38 @@ body {
   height: 100%;
   z-index: 1;
 }
-
-/* fundo */
-
 .envelopeBack {
   position: absolute;
   inset: 0;
-
   background: linear-gradient(180deg, #1a3558, #132846);
-
   border-radius: 18px;
-
   overflow: hidden;
-
   z-index: 1;
 }
-/* CARTA */
 
 .envelopeLetter {
-  position: relative;
-  left: 50%;
-  width: 82%;
-  height: 260px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background: #fbfaf6;
-  border-radius: 16px;
+  border-radius: 18px; /* Combinando com o raio do envelope */
   padding: 30px;
   color: #273247;
-  bottom: -20px; /* Escondida na base */
-  transform: translateX(-50%) translateY(0) rotateX(-20deg);
   transform-origin: bottom center;
-  transition:
-    bottom 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-  overflow: hidden;
-  z-index: 1; /* Abaixo da Frente (z-index 5) */
+  transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  overflow: hidden; /* Removida a barra de scroll */
+  z-index: 10;
 }
 
-/* tampa */
+.typedText {
+  font-family: "Georgia", serif;
+  font-size: clamp(12px, 2vw, 15px);
+  line-height: 1.5;
+  color: #2c3e50;
+  white-space: pre-wrap;
+}
 
 .envelopeFlap {
   position: absolute;
@@ -323,79 +353,65 @@ body {
   width: 100%;
   height: 100%;
   clip-path: polygon(0 0, 100% 0, 50% 50%);
-  background: linear-gradient(
-    145deg,
-    #2d5387,
-    #193457
-  ); /* Adicione a cor de volta */
+  background: linear-gradient(145deg, #2d5387, #193457);
   transform-origin: top center;
   transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-  z-index: 10; /* Garante que ela esteja acima da frente e da carta */
+  z-index: 10;
 }
-
-/* Melhoria na animação da tampa */
 .cosmicEnvelope.openFlap .envelopeFlap {
   transform: rotateX(-180deg);
-  z-index: 1; /* Abaixa após abrir para não atrapalhar a carta subindo */
+  z-index: 1;
 }
-
-/* frente */
 
 .envelopeFront {
   position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 64%;
+  height: 64%; /* Esta altura define o quanto da carta fica coberta */
   background: linear-gradient(180deg, #27497b, #173152);
   border-radius: 0 0 18px 18px;
-  z-index: 5; /* Garante que a frente esconda a carta */
-  pointer-events: none; /* Para não bloquear cliques */
+  z-index: 5; /* Fica acima do envelopeBack */
+  pointer-events: none;
 }
 
-/* Melhoria na física da carta */
+/* Garante que o papel, ao subir, fique acima da frente (z-index 20) */
 .cosmicEnvelope.showLetter .envelopeLetter {
-  bottom: 105px; /* Aumentado para sair mais do envelope */
-  transform: translateX(-50%) translateY(0) rotateX(0deg);
-  transition:
-    bottom 1.5s cubic-bezier(0.19, 1, 0.22, 1),
-    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1);
-  z-index: 10;
+  bottom: 0;
+  transform: translateY(-20%) rotateX(0deg);
+  z-index: 20;
+}
+
+/* Garante que a frente não suba junto com o papel */
+.cosmicEnvelope.showLetter .envelopeFront {
+  z-index: 5;
 }
 
 .closeLetter {
   position: absolute;
   top: 15px;
   right: 15px;
-
   width: 32px;
   height: 32px;
-
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-
   color: #273247;
-  font-family: sans-serif;
   font-size: 14px;
   font-weight: bold;
-
   cursor: pointer;
   transition: all 0.3s ease;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 .closeLetter:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: rotate(90deg) scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 /* ==========================================================
-   LIGHT BEAM & ANIMATIONS
+   ANIMATIONS & EFFECTS
 ========================================================== */
 #lightBeam {
   position: fixed;
@@ -409,16 +425,14 @@ body {
   opacity: 0;
   pointer-events: none;
   z-index: 9999;
-  /* Transição mais longa para parecer "orgânica" */
   transition:
     opacity 0.8s ease-out,
     transform 1s cubic-bezier(0.16, 1, 0.3, 1);
   transform: scale(0.1);
 }
-
 #lightBeam.active {
   opacity: 1;
-  transform: scale(1.8); /* Expansão um pouco maior */
+  transform: scale(1.8);
 }
 
 @keyframes nebulaMove {
@@ -478,63 +492,41 @@ body {
   }
 }
 
-/* ==========================================
-   GLOW DA CARTA
-========================================== */
-
 .letterGlow {
   position: absolute;
-
   left: 50%;
   top: 50%;
-
   width: 260px;
   height: 260px;
-
   transform: translate(-50%, -50%);
-
   border-radius: 50%;
-
   background: radial-gradient(
     circle,
     rgba(120, 190, 255, 0.45),
     rgba(70, 150, 255, 0.18),
     transparent 72%
   );
-
   filter: blur(30px);
-
   opacity: 0.75;
-
   pointer-events: none;
-
   z-index: -1;
-
   animation: letterGlow 3s ease-in-out infinite;
 }
-
 @keyframes letterGlow {
   0%,
   100% {
     transform: translate(-50%, -50%) scale(0.85);
-
     opacity: 0.45;
   }
-
   50% {
     transform: translate(-50%, -50%) scale(1.18);
-
     opacity: 1;
   }
 }
 
-/* ==========================================
-   MAGIC PARTICLES
-========================================== */
-
 .magicParticle {
   position: absolute;
-  width: 6px; /* Ajustado para um meio-termo elegante */
+  width: 6px;
   height: 6px;
   background: #ffffff;
   border-radius: 50%;
@@ -543,22 +535,20 @@ body {
     0 0 25px #4ea8ff;
   pointer-events: none;
   opacity: 0;
-  /* Animação de subida mais lenta e suave */
   animation: magicRise 4s ease-out forwards;
 }
-
 @keyframes magicRise {
   0% {
     opacity: 0;
     transform: translateY(0) scale(0.5);
   }
   20% {
-    opacity: 1; /* O brilho se mantém forte por mais tempo */
+    opacity: 1;
     transform: translateY(-40px) scale(1.2);
   }
   100% {
     opacity: 0;
-    transform: translateY(-300px) scale(0.2); /* Sobe mais alto */
+    transform: translateY(-300px) scale(0.2);
   }
 }
 
@@ -580,17 +570,10 @@ body {
   z-index: -1;
   pointer-events: none;
 }
-
-/* O brilho aparece quando a carta sobe */
 .cosmicEnvelope.showLetter .letterTrail {
   opacity: 1;
 }
 
-/* ==========================================
-   SHIMMER EFFECT
-========================================== */
-
-/* Efeito de brilho que passa pela carta */
 .shimmer {
   position: absolute;
   top: 0;
@@ -608,7 +591,6 @@ body {
   z-index: 5;
   animation: shimmerEffect 5s infinite linear;
 }
-
 @keyframes shimmerEffect {
   0% {
     left: -100%;
@@ -616,5 +598,5 @@ body {
   30%,
   100% {
     left: 150%;
-  } /* Tempo maior entre os brilhos para ficar mais sutil */
+  }
 }
