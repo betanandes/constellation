@@ -149,3 +149,14 @@ function criarParticulas() {
     setTimeout(() => p.remove(), 5000);
   }
 }
+
+// Exemplo lógico dentro da sua função de digitação:
+function animarTexto(elemento, texto) {
+  let i = 0;
+  const interval = setInterval(() => {
+    elemento.textContent += texto.charAt(i);
+    tocarDigitação(); // Toca o som a cada caractere
+    i++;
+    if (i >= texto.length) clearInterval(interval);
+  }, 50); // Velocidade da digitação
+}

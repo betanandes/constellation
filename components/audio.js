@@ -12,3 +12,10 @@ export function tocarSom(efeito) {
   audio.volume = 0.5;
   audio.play().catch((e) => console.error("Erro ao tocar som:", e));
 }
+
+export function tocarDigitação() {
+  const audio = new Audio(`assets/audio/typing.mp3`);
+  audio.volume = 0.3;
+  audio.playbackRate = 1.5 + Math.random(); // Varia o tom levemente
+  audio.play();
+}
